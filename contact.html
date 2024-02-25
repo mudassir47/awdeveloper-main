@@ -148,7 +148,7 @@
 <div class="col-lg-6 col-12">
 <div class="contact-form">
 <h3 class="form-title">Leave a message here</h3>
-<form class="form"  >
+<form class="form" name="mkcontact" id="mkcontact" >
 <div class="row">
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
@@ -177,7 +177,7 @@
 </div>
 <div class="col-12">
 <div class="button">
-<button type="submit" class="btn ">Send Message</button>
+<button type="submit"  class="btn" id="submit">Send Message</button>
 </div>
 </div>
 </div>
@@ -188,7 +188,7 @@
 </div>
 </div>
 
-<!-- 
+<!-- `
 <div class="map-section">
 <div class="container">
 <div class="row">
@@ -310,7 +310,7 @@
 <a href="#" class="scroll-top">
 <i class="lni lni-chevron-up"></i>
 </a>
-<script>
+<!-- <script>
   document.querySelector('.form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
     
@@ -326,7 +326,21 @@
     // Redirect the user to the WhatsApp link
     window.location.href = whatsappLink;
   });
-  </script>
+  </script> -->
+
+
+  <script>
+   const scriptURL = 'https://script.google.com/macros/s/AKfycbzvCEJUNY_3x926m6Ujf7ygYzqRypHsKZ3paN-q5yn9Srg2X-xfb-gSl1zQB-S4Shdv/exec'
+			const form = document.forms['mkcontact']
+		  
+			form.addEventListener('submit', e => {
+			  e.preventDefault()
+			  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+				.then(response => alert("Thank you! your form is submitted successfully." ))
+				.then(() => {  window.location.reload(); })
+				.catch(error => console.error('Error!', error.message))
+			})
+    </script>
 
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/bootstrap.min.js"></script>
 <script src="js/wow.min.js"></script>
