@@ -2,7 +2,7 @@
 	
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Contact Us - AWDeveloper.</title>
+<title>Contact us - AWDeveloper.</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="img/awlogo.png">
@@ -149,7 +149,7 @@
 <div class="col-lg-6 col-12">
 <div class="contact-form">
 <h3 class="form-title">Leave a message here</h3>
-<form action="" onsubmit=" return sender()" class="form" name="mkcontact"  id="mkcontact" >
+<form action="" onsubmit=" return senders()" class="form" name="mkcontact"  id="mkcontact" >
 <div class="row">
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
@@ -188,46 +188,7 @@
 </div>
 </div>
 </div>
-<script>
-	var telegram_bot_id = "7179488883:AAFdIwGWH-YwKGQBdvq-lz4KpYSViqgfizY";
-//chat id
-	  phone email name subject message-area
-var chat_id = 5777429174;
-var u_name, email, message, subject , phone;
-var ready = function () {
-    u_name = document.getElementById("name11").value;
-	phone = document.getElementById("phone11").value;
-subject = document.getElementById("subject11").value;
-    email = document.getElementById("email1").value;
-    message = document.getElementById("message-area").value;
-    message = "Name: " + u_name + "\nPhone Number: " + phone + "\nEmail: " + email + "\nSubject: " + subject + "\nMessage: " + message;
-};
-	var sender = function () {
-    ready();
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
-        "method": "POST",
-        "headers": {
-            "Content-Type": "application/json",
-            "cache-control": "no-cache"
-        },
-        "data": JSON.stringify({
-            "chat_id": 5777429174,
-            "text": message
-        })
-    };
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-    });
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("message").value = "";
-    return false;
-};
 
-</script>
 <!-- `
 <div class="map-section">
 <div class="container">
@@ -308,6 +269,50 @@ subject = document.getElementById("subject11").value;
       </div>
     </form>
     <script>
+
+
+	var telegram_bot_id = "7179488883:AAFdIwGWH-YwKGQBdvq-lz4KpYSViqgfizY";
+//chat id
+	  phone email name subject message-area
+var chat_id = 5777429174;
+var u_name, email, message, subject , phone;
+var ready = function () {
+    u_name = document.getElementById("name11").value;
+	phone = document.getElementById("phone11").value;
+subject = document.getElementById("subject11").value;
+    email = document.getElementById("email1").value;
+    message = document.getElementById("message-area").value;
+    message = "Name: " + u_name + "\nPhone Number: " + phone + "\nEmail: " + email + "\nSubject: " + subject + "\nMessage: " + message;
+};
+	var senders = function () {
+    ready();
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "data": JSON.stringify({
+            "chat_id": 5777429174,
+            "text": message
+        })
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+    return false;
+};
+
+
+
+
+	    
       document.getElementById('newsletterForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent form submission
     
