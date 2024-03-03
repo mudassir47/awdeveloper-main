@@ -153,22 +153,22 @@
 <div class="row">
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
-<input name="name" id="name11" type="text" placeholder="Name*" required="required">
+<input name="name" id="name" type="text" placeholder="Name*" required="required">
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
-<input name="email" id="email11" type="email" placeholder="Email*" required="required">
+<input name="email" id="email" type="email" placeholder="Email*" required="required">
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
-<input name="subject" id="subject11" type="text" placeholder="Subject*" required="required">
+<input name="subject" id="subject" type="text" placeholder="Subject*" required="required">
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-12">
 <div class="form-group">
-<input name="phone" id="phone11" type="text" placeholder="Phone*" required="required">
+<input name="phone" id="phone" type="text" placeholder="Phone*" required="required">
 </div>   
 </div>
 <div class="col-12">
@@ -277,10 +277,10 @@
 var chat_id = 5777429174;
 var u_name, email, message, subject , phone;
 var ready = function () {
-    u_name = document.getElementById("name11").value;
-	phone = document.getElementById("phone11").value;
-subject = document.getElementById("subject11").value;
-    email = document.getElementById("email1").value;
+    u_name = document.getElementById("name").value;
+	phone = document.getElementById("phone").value;
+subject = document.getElementById("subject").value;
+    email = document.getElementById("email").value;
     message = document.getElementById("message-area").value;
     message = "Name: " + u_name + "\nPhone Number: " + phone + "\nEmail: " + email + "\nSubject: " + subject + "\nMessage: " + message;
 };
@@ -314,6 +314,34 @@ subject = document.getElementById("subject11").value;
 
 	    
       document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+
+
+
+ ready();
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "data": JSON.stringify({
+            "chat_id": 5777429174,
+            "text": message
+        })
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+    return false;
+
+
+	      
         event.preventDefault(); // Prevent form submission
     
         var email = document.getElementById('email').value;
