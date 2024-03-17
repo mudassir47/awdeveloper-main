@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="bg-gray-800 text-white w-64 p-4 space-y-4">
+          <div class="text-xl font-semibold">ChatGPT</div>
+          <div>
+            <div class="text-gray-300 text-sm">History</div>
+      
+            <ul class="space-y-2 mt-3">
+              <li>Conversation 1</li>
+              <li>Conversation 2</li>
+              <!-- More conversations -->
+            </ul>
+          </div>
+        </div>
+      
+        <!-- Chat Container -->
+        <div class="flex flex-col flex-1 ">
+          <div class="overflow-y-auto p-4 space-y-4 bg-gray-100 flex-1">
+            <div class="text-right">
+              <div class="inline-block bg-blue-500 text-white rounded px-4 py-2 " id="chatList"></div>
+            </div>
+
+
+            <div class="text-left">
+              <div class="inline-block bg-gray-300 rounded px-4 py-2">
+             
+              </div>
+            </div>
+          </div>
+      
+          <!-- Input Area -->
+          <div class="p-4 border-t border-gray-200">
+            <div class="flex gap-4">
+              <input id="messageInput" type="text" class="flex-1 p-2 border border-gray-300 rounded" placeholder="Type your message..." />
+              <button id="sendButton" class="bg-blue-500 text-white rounded px-4 py-2">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script type="module">
+   import { getDatabase, ref, push, onChildAdded } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDrwoTubJRWXqH4so2rHMUOB7uEQs8L_Gw",
+    authDomain: "awdeveloper-f2b8a.firebaseapp.com",
+    databaseURL: "https://awdeveloper-f2b8a-default-rtdb.firebaseio.com",
+    projectId: "awdeveloper-f2b8a",
+    storageBucket: "awdeveloper-f2b8a.appspot.com",
+    messagingSenderId: "282175704205",
+    appId: "1:282175704205:web:a8f9d7d0e62b4fff0726c4",
+    measurementId: "G-DEC9K1X09R"
+    };
+
+  
+    
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const database = getDatabase(firebaseApp);
+
+    const chatRef = ref(database, 'chat');
+
+    // Function to send a message
+    function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value.trim();
+
+        if (message !== '') {
+            push(chatRef, {
+                message: message
+            });
+
+            messageInput.value = '';
+        }
+    }
+
+    // Function to display chat messages
+    onChildAdded(chatRef, (snapshot) => {
+        const message = snapshot.val().message;
+        displayMessage(message);
+    });
+
+    // Function to display a message in the chat list
+    function displayMessage(message) {
+        const chatList = document.getElementById('chatList');
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = message;
+        chatList.appendChild(messageDiv);
+    }
+
+    // Add event listener to the button to call sendMessage function
+    document.getElementById('sendButton').addEventListener('click', sendMessage);
+</script>
+</body>
+</html>
