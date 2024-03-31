@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+</head>
+<body>
+
+<div class="col-lg-6 col-12">
+  <div class="contact-form">
+    <h3 class="form-title">Leave a message here</h3>
+    <form class="form" id="contactForm" method="post">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="form-group">
+            <input name="name" type="text" id="name" placeholder="Name*" required="required">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="form-group">
+            <input name="email" type="email" id="email" placeholder="Email*" required="required">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="form-group">
+            <input name="subject" type="text" id="subject" placeholder="Subject*" required="required">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="form-group">
+            <input name="phone" type="text" id="phone" placeholder="Phone*" required="required">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <textarea placeholder="Message*" name="message" id="message" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="button">
+            <button type="button" id="sendMessage" class="btn">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('sendMessage').addEventListener('click', function() {
+  var name = document.getElementById('name').value;
+  var phone = document.getElementById('phone').value;
+  var message = document.getElementById('message').value;
+
+  // Construct the WhatsApp message link with filled-in details
+  var whatsappLink = "https://wa.me/+919958399157/?text=Name:%20" + encodeURIComponent(name) + "%0APhone:%20" + encodeURIComponent(phone) + "%0AMessage:%20" + encodeURIComponent(message);
+
+  // Redirect the user to the WhatsApp link
+  window.location.href = whatsappLink;
+});
+</script>
+
+</body>
+</html>
