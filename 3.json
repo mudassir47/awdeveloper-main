@@ -1,0 +1,51 @@
+Exp-03
+
+Write a program to interface the stepper motor with 8051.
+
+Program code:
+
+ORG 00H
+
+MOV TMOD, #01H
+
+MAIN:
+
+MOV P2, #01H
+
+ACALL DELAY
+
+MOV P2, #02H
+
+ACALL DELAY
+
+MOV P2, #04H
+
+ACALL DELAY
+
+MOV P2, #08H
+
+ACALL DELAY
+
+SJMP MAIN
+
+// To generate a delay of 200 *1 ms
+
+DELAY:MOV R0,#200 //change this value to required delay in ms
+
+BACK: MOV TH0,#0FCH
+
+MOV TL0,#018H 
+
+SETB TR0
+
+wait: JNB TF0,wait
+
+CLR TR0
+
+CLR TF0
+
+DJNZ R0,BACK
+
+RET
+
+EN
