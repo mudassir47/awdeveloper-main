@@ -1,0 +1,75 @@
+Exp-01
+
+TITLE: Timer operation of 8051 (Square wave using timer.)
+
+CLR P1.1
+
+MOV TMOD,#01H //configure timer in mode-1
+
+REPEAT:MOV TL1,#066H
+
+MOV TH1,#0FCH //load the timer count in TH1 and TL1
+
+SETB P1.1 //set P1.1 high to get ON Time
+
+SETB TR1 //start timer 1
+
+HERE:JNB TF1,HERE
+
+CLR P1.1
+
+CLR TR1
+
+CLR TF1
+
+SJMP REPEAT
+
+Exp-02 TITLE: Serial communication using 8051.
+
+Write a program for to transmit AIKTC serially using 
+
+microcontroller 8051.
+
+Algorithm:
+
+ORG 00H
+
+MOV TMOD,#20H
+
+MOV TH1,# -3 ; baud rate
+
+MOV SCON,#50H
+
+SETB TR1
+
+UP: MOV A, #'A'
+
+ACALL SEND
+
+MOV A, #'I'
+
+ACALL SEND 
+
+MOV A, #'K'
+
+ACALL SEND 
+
+MOV A, #'T'
+
+ACALL SEND 
+
+MOV A, #'C'
+
+ACALL SEND
+
+SJMP UP
+
+SEND : MOV SBUF, A
+
+HERE: JNB TI, HERE
+
+CLR TI
+
+RET
+
+END
