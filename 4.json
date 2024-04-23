@@ -1,0 +1,46 @@
+Exp-04
+
+1. Program to add two 8-bit number:
+
+.model small
+
+.stack 100h
+
+.data
+
+a db 09h 
+
+b db 02h
+
+.code mov 
+
+ax,@data mov 
+
+ds,ax mov al,a 
+
+mov bl,b add 
+
+al,bl mov cl,al
+int 21h mov 
+
+ah,4ch int 3h 
+
+end
+
+2. Program to subtract to 8-bit numbers.
+
+.model small
+
+.stack 100h
+
+.data
+
+a db 02h
+
+b db 09h Result db ? .code mov ax,@data 
+
+mov ds,ax mov al,a sub al,b ; 02-09 = -7 
+
+jnc next not al inc al next:move result , al 
+
+int 21h mov ah,4ch int 3h end
