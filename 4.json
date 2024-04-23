@@ -8,22 +8,29 @@ Exp-04
 
 .data
 
-a db 09h 
+a db 09h
 
 b db 02h
 
-.code mov 
+.code
 
-ax,@data mov 
+mov ax,@data
 
-ds,ax mov al,a 
+mov ds,ax
 
-mov bl,b add 
+mov al,a
 
-al,bl mov cl,al
-int 21h mov 
+mov bl,b
 
-ah,4ch int 3h 
+add al,bl
+
+mov cl,al
+
+int 21h
+
+mov ah,4ch
+
+int 3h
 
 end
 
@@ -36,11 +43,32 @@ end
 .data
 
 a db 02h
+b db 09h
 
-b db 09h Result db ? .code mov ax,@data 
+Result db ?
 
-mov ds,ax mov al,a sub al,b ; 02-09 = -7 
+.code
 
-jnc next not al inc al next:move result , al 
+mov ax,@data
 
-int 21h mov ah,4ch int 3h end
+mov ds,ax
+
+mov al,a
+
+sub al,b ; 02-09 = -7
+
+jnc next
+
+not al
+
+inc al
+
+next:move result , al
+
+int 21h
+
+mov ah,4ch
+
+int 3h
+
+end
