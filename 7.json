@@ -8,30 +8,45 @@ Exp-07
 
 .data
 
-abc dd 12345678h 
+abc dd 12345678h
 
-def dd 9abcdef0h 
+def dd 9abcdef0h
 
 ghi dw ?
 
-.code mov ax,@data mov 
+.code
 
-ds,ax mov dl , 00h mov ax, 
+mov ax,@data
 
-word ptr abc mov bx, word 
+mov ds,ax
 
-ptr def add ax,bx mov word 
+mov dl , 00h
 
-ptr ghi , ax mov ax,word ptr 
+mov ax, word ptr abc
 
-abc+2 mov bx, word ptr 
+mov bx, word ptr def
 
-def+2 adc ax,bx mov word 
+add ax,bx
 
-ptr ghi+2,ax jnc move inc dl 
+mov word ptr ghi , ax
 
-move: mov byte ptr ghi+4,dl 
+mov ax,word ptr abc+2
 
-int 21h mov ah,4ch int 3h 
+mov bx, word ptr def+2
+
+adc ax,bx
+
+mov word ptr ghi+2,ax
+
+jnc move
+
+inc dl
+
+move: mov byte ptr ghi+4,dl
+int 21h
+
+mov ah,4ch
+
+int 3h
 
 end
